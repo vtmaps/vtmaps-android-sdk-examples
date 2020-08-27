@@ -31,6 +31,9 @@ public class HomeActivity extends AppCompatActivity implements OnClickListener {
 
         View vMapOjects = findViewById(R.id.vMapOjects);
         vMapOjects.setOnClickListener(this);
+
+        View vCustomLayer = findViewById(R.id.vCustomLayer);
+        vCustomLayer.setOnClickListener(this);
     }
 
     @Override
@@ -64,6 +67,11 @@ public class HomeActivity extends AppCompatActivity implements OnClickListener {
                 Intent vMapOjects = new Intent(this, MapObjectActivity.class);
                 startActivity(vMapOjects);
                 break;
+            case R.id.vCustomLayer:
+                Intent vCustomLayer = new Intent(this, CustomLayerActivity.class);
+                startActivity(vCustomLayer);
+                break;
+
         }
     }
 }

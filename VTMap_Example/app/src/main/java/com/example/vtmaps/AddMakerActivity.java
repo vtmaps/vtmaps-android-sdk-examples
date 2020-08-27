@@ -97,9 +97,9 @@ public class AddMakerActivity extends AppCompatActivity implements OnMapReadyCal
                     @Override
                     public boolean onMarkerClick(@NonNull Marker marker) {
                         if (marker.getId() == 1) {
-                            return false;
+                           // return false;
                         }
-                        return true;
+                        return false;
                     }
                 });
 

@@ -18,12 +18,8 @@ import com.mapbox.mapboxsdk.plugins.annotation.LineOptions;
 import com.mapbox.mapboxsdk.plugins.annotation.OnCircleClickListener;
 import com.mapbox.mapboxsdk.plugins.annotation.OnFillClickListener;
 import com.mapbox.mapboxsdk.plugins.annotation.OnLineClickListener;
-import com.viettel.maps.services.AdminService;
-import com.viettel.maps.services.AdminServiceResult;
 import com.viettel.vtmsdk.MapVT;
-import com.viettel.vtmsdk.annotations.MarkerOptions;
 import com.viettel.vtmsdk.camera.CameraPosition;
-import com.viettel.vtmsdk.camera.CameraUpdateFactory;
 import com.viettel.vtmsdk.geometry.LatLng;
 import com.viettel.vtmsdk.maps.MapView;
 import com.viettel.vtmsdk.maps.OnMapReadyCallback;
@@ -131,4 +127,40 @@ import java.util.List;
             }
         });
     }
+
+        @Override
+        protected void onStart() {
+            super.onStart();
+            mapView.onStart();
+        }
+
+        @Override
+        protected void onResume() {
+            super.onResume();
+            mapView.onResume();
+        }
+
+        @Override
+        protected void onPause() {
+            super.onPause();
+            mapView.onPause();
+        }
+
+        @Override
+        protected void onStop() {
+            super.onStop();
+            mapView.onStop();
+        }
+
+        @Override
+        public void onLowMemory() {
+            super.onLowMemory();
+            mapView.onLowMemory();
+        }
+
+        @Override
+        protected void onDestroy() {
+            super.onDestroy();
+            mapView.onDestroy();
+        }
 }

@@ -35,13 +35,13 @@ import java.util.List;
 public class GeoServiceActivity extends AppCompatActivity implements OnMapReadyCallback {
     private MapView mapView;
     private VTMap vtMap;
-    private GeoService geoService;
     private Button btnSearch;
     private EditText edtSearch;
     private View lnSearchCondition;
     private CheckBox cbSearchAround;
     private RadioGroup radioGroup;
     private EditText edtRadius;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +52,7 @@ public class GeoServiceActivity extends AppCompatActivity implements OnMapReadyC
 
         btnSearch = findViewById(R.id.btnSearch);
         edtSearch = findViewById(R.id.edtSearch);
-        edtRadius= findViewById(R.id.edtRadius);
+        edtRadius = findViewById(R.id.edtRadius);
         lnSearchCondition = findViewById(R.id.lnSearchCondition);
         cbSearchAround = findViewById(R.id.cbSearchAround);
         radioGroup = findViewById(R.id.radioGroup);
@@ -70,7 +70,7 @@ public class GeoServiceActivity extends AppCompatActivity implements OnMapReadyC
 
                 final List<LatLng> listLatLng = new ArrayList<>();
                 if (cbSearchAround.isChecked()) {
-                    geoService = new GeoService().accessToken(getString(R.string.access_token));
+                    GeoService geoService = new GeoService().accessToken(getString(R.string.access_token));
                     geoService.limit(10);
                     geoService.offset(0);
                     geoService.getLocations(edtSearch.getText().toString().trim(), getSearchType(), vtMap.getCameraPosition().target, Integer.valueOf(edtRadius.getText().toString()), new GeoService.GeoServiceListener() {
@@ -111,6 +111,9 @@ public class GeoServiceActivity extends AppCompatActivity implements OnMapReadyC
                         }
                     });
                 } else {
+                    GeoService geoService = new GeoService().accessToken(getString(R.string.access_token));
+                    geoService.limit(10);
+                    geoService.offset(0);
                     geoService.getLocations(edtSearch.getText().toString().trim(), new GeoService.GeoServiceListener() {
                         @Override
                         public void onGeoServicePreProcess(GeoService param1GeoService) {
@@ -179,46 +182,46 @@ public class GeoServiceActivity extends AppCompatActivity implements OnMapReadyC
                     @Override
                     public boolean onMapClick(@NonNull final LatLng point) {
                         new GeoService().accessToken(getString(R.string.access_token))
-                        .limit(10)
-                        .offset(0)
-                        .getAddress(point, new GeoService.GeoServiceListener() {
-                            @Override
-                            public void onGeoServicePreProcess(GeoService param1GeoService) {
+                                .limit(10)
+                                .offset(0)
+                                .getAddress(point, new GeoService.GeoServiceListener() {
+                                    @Override
+                                    public void onGeoServicePreProcess(GeoService param1GeoService) {
 
-                            }
-
-                            @Override
-                            public void onGeoServiceCompleted(GeoServiceResult param1GeoServiceResult) {
-                                if (!param1GeoServiceResult.getItems().isEmpty()) {
-                                    for (Marker mk : vtMap.getMarkers()) {
-                                        vtMap.removeMarker(mk);
                                     }
-                                    MarkerOptions markerOptions = new MarkerOptions().position(point)
-                                            .snippet(param1GeoServiceResult.getItem(0).getAddress());
 
-                                    vtMap.addMarker(markerOptions);
-                                    Toast.makeText(GeoServiceActivity.this, param1GeoServiceResult.getItem(0).getAddress(), Toast.LENGTH_LONG).show();
-                                }
-                            }
-                        });
+                                    @Override
+                                    public void onGeoServiceCompleted(GeoServiceResult param1GeoServiceResult) {
+                                        if (!param1GeoServiceResult.getItems().isEmpty()) {
+                                            for (Marker mk : vtMap.getMarkers()) {
+                                                vtMap.removeMarker(mk);
+                                            }
+                                            MarkerOptions markerOptions = new MarkerOptions().position(point)
+                                                    .snippet(param1GeoServiceResult.getItem(0).getAddress());
+
+                                            vtMap.addMarker(markerOptions);
+                                            Toast.makeText(GeoServiceActivity.this, param1GeoServiceResult.getItem(0).getAddress(), Toast.LENGTH_LONG).show();
+                                        }
+                                    }
+                                });
 
                         //get addresses of multi point
                         List<LatLng> listLatLng = new ArrayList<>();
                         listLatLng.add(new LatLng(16.04791610056455, 108.21643351855755));
-                        listLatLng.add(new LatLng(21.044844,105.852367));
+                        listLatLng.add(new LatLng(21.044844, 105.852367));
 
                         new GeoService().accessToken(getString(R.string.access_token))
-                        .getAddresses(listLatLng, new GeoService.GeoServiceListener() {
-                            @Override
-                            public void onGeoServicePreProcess(GeoService param1GeoService) {
+                                .getAddresses(listLatLng, new GeoService.GeoServiceListener() {
+                                    @Override
+                                    public void onGeoServicePreProcess(GeoService param1GeoService) {
 
-                            }
+                                    }
 
-                            @Override
-                            public void onGeoServiceCompleted(GeoServiceResult param1GeoServiceResult) {
+                                    @Override
+                                    public void onGeoServiceCompleted(GeoServiceResult param1GeoServiceResult) {
 
-                            }
-                        });
+                                    }
+                                });
 
                         return true;
                     }

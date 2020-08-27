@@ -1,161 +1,188 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#ffffff"
-    android:orientation="vertical"
-    tools:context=".HomeActivity">
+    android:layout_height="match_parent">
 
-    <LinearLayout
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
+        android:layout_height="match_parent"
+        android:background="#ffffff"
         android:orientation="vertical"
-        android:padding="15dp">
+        tools:context=".HomeActivity">
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="VTMaps Example"
-            android:textColor="@android:color/white"
-            android:textSize="18sp">
+            android:background="@color/colorPrimary"
+            android:orientation="vertical"
+            android:padding="15dp">
 
-        </TextView>
-    </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="VTMaps Example"
+                android:textColor="@android:color/white"
+                android:textSize="18sp">
 
-    <LinearLayout
-        android:id="@+id/vAddMaker"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="15dp">
+            </TextView>
+        </LinearLayout>
 
-        <TextView
+        <LinearLayout
+            android:id="@+id/vAddMaker"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Marker"
-            android:textColor="@android:color/black"
-            android:textSize="18sp">
+            android:orientation="vertical"
+            android:padding="15dp">
 
-        </TextView>
-    </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Marker"
+                android:textColor="@android:color/black"
+                android:textSize="18sp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@android:color/darker_gray"
-        android:orientation="vertical"
-        android:padding="15dp" />
+            </TextView>
+        </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/vAddDragMaker"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="15dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"
+            android:orientation="vertical"
+            android:padding="15dp" />
 
-        <TextView
+        <LinearLayout
+            android:id="@+id/vAddDragMaker"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Drag Marker"
-            android:textColor="@android:color/black"
-            android:textSize="18sp">
+            android:orientation="vertical"
+            android:padding="15dp">
 
-        </TextView>
-    </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Drag Marker"
+                android:textColor="@android:color/black"
+                android:textSize="18sp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@android:color/darker_gray"
-        android:orientation="vertical"
-        android:padding="15dp" />
+            </TextView>
+        </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/vRouting"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="15dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"
+            android:orientation="vertical"
+            android:padding="15dp" />
 
-        <TextView
+        <LinearLayout
+            android:id="@+id/vRouting"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Routing"
-            android:textColor="@android:color/black"
-            android:textSize="18sp"></TextView>
-    </LinearLayout>
+            android:orientation="vertical"
+            android:padding="15dp">
 
-    <LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="1dp"
-    android:background="@android:color/darker_gray"
-    android:orientation="vertical"
-    android:padding="15dp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Routing"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"></TextView>
+        </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/vAdminService"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="15dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"
+            android:orientation="vertical"
+            android:padding="15dp" />
 
-        <TextView
+        <LinearLayout
+            android:id="@+id/vAdminService"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Admin service"
-            android:textColor="@android:color/black"
-            android:textSize="18sp"></TextView>
-    </LinearLayout>
+            android:orientation="vertical"
+            android:padding="15dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Admin service"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"></TextView>
+        </LinearLayout>
 
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"
+            android:orientation="vertical"
+            android:padding="15dp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@android:color/darker_gray"
-        android:orientation="vertical"
-        android:padding="15dp" />
-
-    <LinearLayout
-        android:id="@+id/vGeoService"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="15dp">
-
-        <TextView
+        <LinearLayout
+            android:id="@+id/vGeoService"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Geo Service"
-            android:textColor="@android:color/black"
-            android:textSize="18sp"></TextView>
-    </LinearLayout>
+            android:orientation="vertical"
+            android:padding="15dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@android:color/darker_gray"
-        android:orientation="vertical"
-        android:padding="15dp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Geo Service"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"></TextView>
+        </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/vMapOjects"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="15dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"
+            android:orientation="vertical"
+            android:padding="15dp" />
 
-        <TextView
+        <LinearLayout
+            android:id="@+id/vMapOjects"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Polygon, PolyLine, Circle"
-            android:textColor="@android:color/black"
-            android:textSize="18sp"></TextView>
-    </LinearLayout>
+            android:orientation="vertical"
+            android:padding="15dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Polygon, PolyLine, Circle"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"></TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"
+            android:orientation="vertical"
+            android:padding="15dp" />
+
+        <LinearLayout
+            android:id="@+id/vCustomLayer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="15dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Custom Layer"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"></TextView>
+        </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -178,4 +205,4 @@
             android:textColor="@android:color/black"
             android:textSize="18sp"></TextView>
     </LinearLayout>
-</LinearLayout>
+</LinearLayout></ScrollView>
