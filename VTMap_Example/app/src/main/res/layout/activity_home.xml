@@ -170,6 +170,50 @@
             android:padding="15dp" />
 
         <LinearLayout
+            android:id="@+id/vMapTypeControl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="15dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Map type Control"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"></TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"
+            android:orientation="vertical"
+            android:padding="15dp" />
+
+        <LinearLayout
+            android:id="@+id/vScalebarControl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="15dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Scale bar Control"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"></TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"
+            android:orientation="vertical"
+            android:padding="15dp" />
+
+        <LinearLayout
             android:id="@+id/vCustomLayer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

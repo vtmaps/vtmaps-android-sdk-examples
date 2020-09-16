@@ -32,6 +32,13 @@ public class HomeActivity extends AppCompatActivity implements OnClickListener {
         View vMapOjects = findViewById(R.id.vMapOjects);
         vMapOjects.setOnClickListener(this);
 
+        View vMapTypeControl = findViewById(R.id.vMapTypeControl);
+        vMapTypeControl.setOnClickListener(this);
+
+        View vScaleBarControl = findViewById(R.id.vScalebarControl);
+        vScaleBarControl.setOnClickListener(this);
+
+
         View vCustomLayer = findViewById(R.id.vCustomLayer);
         vCustomLayer.setOnClickListener(this);
     }
@@ -71,7 +78,14 @@ public class HomeActivity extends AppCompatActivity implements OnClickListener {
                 Intent vCustomLayer = new Intent(this, CustomLayerActivity.class);
                 startActivity(vCustomLayer);
                 break;
-
+            case R.id.vMapTypeControl:
+                Intent vMapTypeControl = new Intent(this, MapTypeControlActivity.class);
+                startActivity(vMapTypeControl);
+                break;
+            case R.id.vScalebarControl:
+                Intent vScalebarControl = new Intent(this, ScaleBarControlActivity.class);
+                startActivity(vScalebarControl);
+                break;
         }
     }
 }
