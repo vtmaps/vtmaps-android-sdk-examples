@@ -1,16 +1,14 @@
 package com.example.vtmaps;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.widget.Toast;
 
-import com.viettel.maps.control.maptype.MapTypeControl;
-import com.viettel.maps.control.scalebar.ScaleBarOptions;
-import com.viettel.maps.control.scalebar.ScaleBarPlugin;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.viettel.maps.v3.control.maptype.MapTypeControl;
 import com.viettel.vtmsdk.MapVT;
-import com.viettel.vtmsdk.annotations.MarkerOptions;
+import com.viettel.vtmsdk.camera.CameraPosition;
 import com.viettel.vtmsdk.geometry.LatLng;
 import com.viettel.vtmsdk.maps.MapView;
 import com.viettel.vtmsdk.maps.OnMapReadyCallback;
@@ -34,6 +32,10 @@ public class MapTypeControlActivity extends AppCompatActivity  implements OnMapR
         this.vtMap = vtMap;
         vtMap.setStyle(Style.VTMAP_TRAFFIC_DAY, new Style.OnStyleLoaded() {
             public void onStyleLoaded(@NonNull Style style) {
+                MapTypeControlActivity.this.vtMap.setCameraPosition(new CameraPosition.Builder()
+                        .target(new LatLng(16.04791610056455, 108.21643351855755))
+                        .zoom(10)
+                        .build());
 
                 MapTypeControl mapTypeControl = new MapTypeControl(mapView, MapTypeControlActivity.this.vtMap);
                 mapTypeControl.addToMap(MapTypeControlActivity.this);
@@ -46,5 +48,41 @@ public class MapTypeControlActivity extends AppCompatActivity  implements OnMapR
 
             }
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mapView.onStart();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mapView.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mapView.onPause();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mapView.onStop();
+    }
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        mapView.onLowMemory();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mapView.onDestroy();
     }
 }

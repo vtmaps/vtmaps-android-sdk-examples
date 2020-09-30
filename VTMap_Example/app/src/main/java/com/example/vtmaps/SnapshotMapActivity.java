@@ -1,18 +1,14 @@
 package com.example.vtmaps;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import com.mapbox.mapboxsdk.plugins.annotation.FillManager;
-import com.viettel.maps.services.AdminLevelType;
-import com.viettel.maps.services.AdminService;
-import com.viettel.maps.services.AdminServiceResult;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.viettel.vtmsdk.MapVT;
 import com.viettel.vtmsdk.camera.CameraPosition;
 import com.viettel.vtmsdk.geometry.LatLng;

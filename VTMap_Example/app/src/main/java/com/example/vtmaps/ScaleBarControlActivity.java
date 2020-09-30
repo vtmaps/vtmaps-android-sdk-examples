@@ -1,17 +1,13 @@
 package com.example.vtmaps;
 
+import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.os.Bundle;
-import android.widget.Toast;
-
-import com.viettel.maps.control.maptype.MapTypeControl;
-import com.viettel.maps.control.scalebar.ScaleBarOptions;
-import com.viettel.maps.control.scalebar.ScaleBarPlugin;
+import com.viettel.maps.v3.control.scalebar.ScaleBarOptions;
+import com.viettel.maps.v3.control.scalebar.ScaleBarPlugin;
 import com.viettel.vtmsdk.MapVT;
-import com.viettel.vtmsdk.annotations.MarkerOptions;
-import com.viettel.vtmsdk.geometry.LatLng;
 import com.viettel.vtmsdk.maps.MapView;
 import com.viettel.vtmsdk.maps.OnMapReadyCallback;
 import com.viettel.vtmsdk.maps.Style;
@@ -52,5 +48,41 @@ public class ScaleBarControlActivity extends AppCompatActivity  implements OnMap
 
             }
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mapView.onStart();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mapView.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mapView.onPause();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mapView.onStop();
+    }
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        mapView.onLowMemory();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mapView.onDestroy();
     }
 }

@@ -1,9 +1,5 @@
 package com.example.vtmaps;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -13,14 +9,17 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import com.viettel.maps.services.GeoObjItem;
-import com.viettel.maps.services.GeoService;
-import com.viettel.maps.services.GeoServiceResult;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.viettel.maps.v3.services.GeoObjItem;
+import com.viettel.maps.v3.services.GeoService;
+import com.viettel.maps.v3.services.GeoServiceResult;
 import com.viettel.vtmsdk.MapVT;
 import com.viettel.vtmsdk.annotations.Marker;
 import com.viettel.vtmsdk.annotations.MarkerOptions;
 import com.viettel.vtmsdk.camera.CameraPosition;
-import com.viettel.vtmsdk.camera.CameraUpdate;
 import com.viettel.vtmsdk.camera.CameraUpdateFactory;
 import com.viettel.vtmsdk.geometry.LatLng;
 import com.viettel.vtmsdk.geometry.LatLngBounds;
