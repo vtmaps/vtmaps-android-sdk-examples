@@ -6,6 +6,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.mapbox.android.core.permissions.PermissionsListener;
+import com.mapbox.android.core.permissions.PermissionsManager;
+import com.viettel.maps.v3.control.maptype.LocationControl;
 import com.viettel.maps.v3.control.maptype.MapTypeControl;
 import com.viettel.vtmsdk.MapVT;
 import com.viettel.vtmsdk.camera.CameraPosition;
@@ -15,9 +18,13 @@ import com.viettel.vtmsdk.maps.OnMapReadyCallback;
 import com.viettel.vtmsdk.maps.Style;
 import com.viettel.vtmsdk.maps.VTMap;
 
-public class MapTypeControlActivity extends AppCompatActivity  implements OnMapReadyCallback {
+import java.util.List;
+
+public class MapTypeControlActivity extends AppCompatActivity implements OnMapReadyCallback, PermissionsListener {
     private MapView mapView;
     private VTMap vtMap;
+    private PermissionsManager permissionsManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +32,12 @@ public class MapTypeControlActivity extends AppCompatActivity  implements OnMapR
         setContentView(R.layout.activity_map_type_control);
         mapView = (MapView) findViewById(R.id.mapView);
         mapView.getMapAsync(this);
+
+        if (!PermissionsManager.areLocationPermissionsGranted(this)) {
+            permissionsManager = new PermissionsManager(this);
+            permissionsManager.requestLocationPermissions(this);
+        }
+
     }
 
     @Override
@@ -45,6 +58,26 @@ public class MapTypeControlActivity extends AppCompatActivity  implements OnMapR
                         Toast.makeText(MapTypeControlActivity.this, "style changed to: " + style.getUri(), Toast.LENGTH_SHORT).show();
                     }
                 });
+
+                LocationControl locationControl = new LocationControl(mapView, MapTypeControlActivity.this.vtMap);
+                locationControl.addToMap(MapTypeControlActivity.this);
+                // ---- You can set custom attribute for LocationControl ---
+                //locationControl.setCustomSize(140);
+                //locationControl.setImageResource(ExampleActivity.this.getResources().getDrawable(R.drawable.ic_location));
+                //locationControl.setRippleColor(Color.RED);
+                locationControl.setZoom(18);
+                locationControl.setOnLocationClickListener(new LocationControl.OnLocationClickListener() {
+                    @Override
+                    public void onLocationClick() {
+                        Toast.makeText(MapTypeControlActivity.this, "Location Control click", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onLocationNotFound() {
+                        Toast.makeText(MapTypeControlActivity.this, "Location not found", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
 
             }
         });
@@ -84,5 +117,15 @@ public class MapTypeControlActivity extends AppCompatActivity  implements OnMapR
     protected void onDestroy() {
         super.onDestroy();
         mapView.onDestroy();
+    }
+
+    @Override
+    public void onExplanationNeeded(List<String> permissionsToExplain) {
+
+    }
+
+    @Override
+    public void onPermissionResult(boolean granted) {
+
     }
 }
