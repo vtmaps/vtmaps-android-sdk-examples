@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.viettel.vtmsdk.MapVT;
@@ -73,20 +74,20 @@ public class AddMakerActivity extends AppCompatActivity implements OnMapReadyCal
                 vtMap.addOnCameraMoveListener(new VTMap.OnCameraMoveListener() {
                     @Override
                     public void onCameraMove() {
-                        Log.d("VTMap"," onCameraMove");
+                        Log.d("VTMap", " onCameraMove");
                     }
                 });
 
                 vtMap.addOnCameraIdleListener(new VTMap.OnCameraIdleListener() {
                     @Override
                     public void onCameraIdle() {
-                        Log.d("VTMap"," onCameraIdle");
+                        Log.d("VTMap", " onCameraIdle");
                     }
                 });
                 mapView.addOnCameraDidChangeListener(new MapView.OnCameraDidChangeListener() {
                     @Override
                     public void onCameraDidChange(boolean animated) {
-                        Log.d("VTMap"," onCameraDidChange");
+                        Log.d("VTMap", " onCameraDidChange");
                     }
                 });
 
@@ -96,8 +97,8 @@ public class AddMakerActivity extends AppCompatActivity implements OnMapReadyCal
                 vtMap.setOnMarkerClickListener(new VTMap.OnMarkerClickListener() {
                     @Override
                     public boolean onMarkerClick(@NonNull Marker marker) {
-                        if (marker.getId() == 1) {
-                           // return false;
+                        if (marker.getTitle() == null || marker.getTitle().isEmpty()) {
+                             return true;
                         }
                         return false;
                     }
@@ -110,6 +111,11 @@ public class AddMakerActivity extends AppCompatActivity implements OnMapReadyCal
 
                         if (marker.getId() == 1) {
                             View v = AddMakerActivity.this.getLayoutInflater().inflate(R.layout.custom_infowindow, null);
+                            TextView tvTitle = v.findViewById(R.id.tvTitle);
+                            TextView tvContent = v.findViewById(R.id.tvContent);
+//
+                            tvTitle.setText(marker.getTitle());
+                            tvContent.setText(marker.getSnippet());
                             return v;
                         }
                         return null;
@@ -134,6 +140,8 @@ public class AddMakerActivity extends AppCompatActivity implements OnMapReadyCal
         IconFactory iconFactory = IconFactory.getInstance(this);
         Icon icon = iconFactory.fromResource(R.drawable.marker);
         MarkerOptions option = new MarkerOptions();
+        option.setTitle("");
+        option.setSnippet("1");
         option.setPosition(new LatLng(16.05791610056455, 108.23643351855755));
         option.setIcon(icon);
         Marker customMarker = vtMap.addMarker(option);

@@ -6,6 +6,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.mapbox.geojson.Point;
+import com.mapbox.geojson.Polygon;
 import com.mapbox.mapboxsdk.plugins.annotation.Circle;
 import com.mapbox.mapboxsdk.plugins.annotation.CircleManager;
 import com.mapbox.mapboxsdk.plugins.annotation.CircleOptions;
@@ -18,6 +20,7 @@ import com.mapbox.mapboxsdk.plugins.annotation.LineOptions;
 import com.mapbox.mapboxsdk.plugins.annotation.OnCircleClickListener;
 import com.mapbox.mapboxsdk.plugins.annotation.OnFillClickListener;
 import com.mapbox.mapboxsdk.plugins.annotation.OnLineClickListener;
+import com.mapbox.turf.TurfTransformation;
 import com.viettel.vtmsdk.MapVT;
 import com.viettel.vtmsdk.camera.CameraPosition;
 import com.viettel.vtmsdk.geometry.LatLng;
@@ -30,7 +33,9 @@ import com.viettel.vtmsdk.style.layers.Property;
 import java.util.ArrayList;
 import java.util.List;
 
-    public class MapObjectActivity extends AppCompatActivity implements OnMapReadyCallback {
+import static com.mapbox.turf.TurfConstants.UNIT_METERS;
+
+public class MapObjectActivity extends AppCompatActivity implements OnMapReadyCallback {
     private MapView mapView;
     private VTMap vtMap;
     private FillManager fillManager;
@@ -59,6 +64,7 @@ import java.util.List;
                 drawPolygon(style);
                 drawCircle(style);
                 drawPolyLine(style);
+                drawCircleWithPhysicalUnit(style);
             }
         });
     }
@@ -90,6 +96,20 @@ import java.util.List;
                 Toast.makeText(MapObjectActivity.this, "Polygon clicked", Toast.LENGTH_LONG).show();
             }
         });
+
+
+    }
+
+    private void drawCircleWithPhysicalUnit(Style style) {
+        FillManager fillManager = new FillManager(mapView, vtMap, style);
+        Polygon polygon = getTurfPolygon(Point.fromLngLat(105.84781770108, 21.030360474622), 1000, 360, UNIT_METERS);
+        FillOptions option = new FillOptions().withGeometry(polygon).withFillColor("blue").withFillOpacity(0.5f);
+        fillManager.create(option);
+    }
+
+    private Polygon getTurfPolygon(@NonNull Point centerPoint, @NonNull double radius,
+                                   @NonNull int steps, @NonNull String units) {
+        return TurfTransformation.circle(centerPoint, radius, steps, units);
     }
 
     private void drawCircle(Style style) {
@@ -110,6 +130,7 @@ import java.util.List;
         });
     }
 
+
     private void drawPolyLine(Style style) {
         lineManager = new LineManager(mapView, vtMap, style);
         final List<LatLng> listPolygonLaLng = new ArrayList<>();
@@ -128,39 +149,39 @@ import java.util.List;
         });
     }
 
-        @Override
-        protected void onStart() {
-            super.onStart();
-            mapView.onStart();
-        }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mapView.onStart();
+    }
 
-        @Override
-        protected void onResume() {
-            super.onResume();
-            mapView.onResume();
-        }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mapView.onResume();
+    }
 
-        @Override
-        protected void onPause() {
-            super.onPause();
-            mapView.onPause();
-        }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mapView.onPause();
+    }
 
-        @Override
-        protected void onStop() {
-            super.onStop();
-            mapView.onStop();
-        }
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mapView.onStop();
+    }
 
-        @Override
-        public void onLowMemory() {
-            super.onLowMemory();
-            mapView.onLowMemory();
-        }
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        mapView.onLowMemory();
+    }
 
-        @Override
-        protected void onDestroy() {
-            super.onDestroy();
-            mapView.onDestroy();
-        }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mapView.onDestroy();
+    }
 }

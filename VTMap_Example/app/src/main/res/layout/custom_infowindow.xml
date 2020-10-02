@@ -5,22 +5,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".AddMakerActivity">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:background="#ffffff"
-        >
-        <TextView
+        android:orientation="vertical">
+
+        <TextView android:id="@+id/tvTitle"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Custom Infowindow"
             android:gravity="center"
-            android:textSize="15sp"/>
-        <TextView
+            android:text="Custom Infowindow"
+            android:textSize="15sp" />
+
+        <TextView  android:id="@+id/tvContent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="  This is content  "/>
+            android:text="  This is content  " />
     </LinearLayout>
 </LinearLayout>
