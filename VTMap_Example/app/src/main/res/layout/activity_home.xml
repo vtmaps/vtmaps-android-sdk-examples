@@ -235,7 +235,35 @@
         android:orientation="vertical"
         android:padding="15dp" />
 
-    <LinearLayout
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"
+            android:orientation="vertical"
+            android:padding="15dp" />
+
+        <LinearLayout
+            android:id="@+id/vPlacePicker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="15dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Place Picker"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"></TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"
+            android:orientation="vertical"
+            android:padding="15dp" />
+        <LinearLayout
         android:id="@+id/vSnapShotMap"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

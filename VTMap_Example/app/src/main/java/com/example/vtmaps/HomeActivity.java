@@ -38,9 +38,12 @@ public class HomeActivity extends AppCompatActivity implements OnClickListener {
         View vScaleBarControl = findViewById(R.id.vScalebarControl);
         vScaleBarControl.setOnClickListener(this);
 
-
         View vCustomLayer = findViewById(R.id.vCustomLayer);
         vCustomLayer.setOnClickListener(this);
+
+        View vPlacePicker = findViewById(R.id.vPlacePicker);
+        vPlacePicker.setOnClickListener(this);
+
     }
 
     @Override
@@ -85,6 +88,10 @@ public class HomeActivity extends AppCompatActivity implements OnClickListener {
             case R.id.vScalebarControl:
                 Intent vScalebarControl = new Intent(this, ScaleBarControlActivity.class);
                 startActivity(vScalebarControl);
+                break;
+            case R.id.vPlacePicker:
+                Intent vPlacePicker = new Intent(this, PlacePickerActivity.class);
+                startActivity(vPlacePicker);
                 break;
         }
     }

@@ -10,7 +10,8 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-// Mapbox Access token
+        // VTMap Access token
         MapVT.getInstance(getApplicationContext(), getString(R.string.access_token));
+        MapVT.setDebugMode(true);
     }
 }

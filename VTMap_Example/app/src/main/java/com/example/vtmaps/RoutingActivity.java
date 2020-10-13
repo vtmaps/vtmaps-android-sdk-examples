@@ -84,6 +84,7 @@ public class RoutingActivity extends AppCompatActivity implements OnMapReadyCall
                         .accessToken(MapVT.getAccessToken() != null ? MapVT.getAccessToken() : "")
                         .profile(DirectionsCriteria.PROFILE_DRIVING)//driving: cho oto va cycling: cho xe may
                         .alternatives(false)//cho phep hien thi tuyen duong goi y hay khong(trong truong hop tim thay 2 tuyen duong tro len)
+                        .baseUrl("https://api.viettelmaps.com.vn:8080/gateway/routing/v1/")//set url server test
                         .packageId(MapVT.getPackageName());
 
 

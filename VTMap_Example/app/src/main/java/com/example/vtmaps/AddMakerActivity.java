@@ -100,6 +100,8 @@ public class AddMakerActivity extends AppCompatActivity implements OnMapReadyCal
                         if (marker.getTitle() == null || marker.getTitle().isEmpty()) {
                              return true;
                         }
+
+                        Object o=marker.getUserData();
                         return false;
                     }
                 });
@@ -140,16 +142,19 @@ public class AddMakerActivity extends AppCompatActivity implements OnMapReadyCal
         IconFactory iconFactory = IconFactory.getInstance(this);
         Icon icon = iconFactory.fromResource(R.drawable.marker);
         MarkerOptions option = new MarkerOptions();
-        option.setTitle("");
+        option.setTitle("custom");
         option.setSnippet("1");
         option.setPosition(new LatLng(16.05791610056455, 108.23643351855755));
         option.setIcon(icon);
+        Long userId = 10L;
+        option.setUserData(userId);
         Marker customMarker = vtMap.addMarker(option);
 
     }
 
     @Override
     protected void onStart() {
+
         super.onStart();
         mapView.onStart();
     }

@@ -6,6 +6,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
 import com.mapbox.mapboxsdk.plugins.annotation.OnSymbolClickListener;
 import com.mapbox.mapboxsdk.plugins.annotation.OnSymbolDragListener;
 import com.mapbox.mapboxsdk.plugins.annotation.OnSymbolLongClickListener;
@@ -84,8 +87,10 @@ public class AddDragMarkerActivity extends AppCompatActivity implements OnMapRea
         SymbolOptions symbolOptions = new SymbolOptions()
                 .withLatLng(new LatLng(16.04791610056455, 108.21643351855755))
                 .withIconImage("ID_ICON")
+                //.withTextField("Adsad")
                 //.withIconSize(1.3f)
                 //.withSymbolSortKey(10.0f)
+                //.withData(element)
                 .withDraggable(true);
         symbolManager.create(symbolOptions);
         symbolManager.addDragListener(new OnSymbolDragListener() {
