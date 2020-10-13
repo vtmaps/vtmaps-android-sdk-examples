@@ -1,13 +1,6 @@
 package com.example.vtmaps;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.location.Location;
-import android.location.LocationManager;
 import android.os.Bundle;
-import android.view.View;
 import android.view.Window;
 import android.view.animation.OvershootInterpolator;
 import android.widget.ImageView;
@@ -15,16 +8,11 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.gson.JsonObject;
 import com.mapbox.android.core.permissions.PermissionsListener;
 import com.mapbox.android.core.permissions.PermissionsManager;
 import com.mapbox.api.geocoding.v5.models.CarmenFeature;
-import com.viettel.vtmsdk.MapVT;
-import com.viettel.vtmsdk.camera.CameraPosition;
-import com.viettel.vtmsdk.camera.CameraUpdateFactory;
 import com.viettel.vtmsdk.geometry.LatLng;
 import com.viettel.vtmsdk.location.LocationComponent;
 import com.viettel.vtmsdk.location.LocationComponentActivationOptions;
@@ -36,7 +24,6 @@ import com.viettel.vtmsdk.maps.Style;
 import com.viettel.vtmsdk.maps.VTMap;
 
 import java.util.List;
-import java.util.Locale;
 
 import timber.log.Timber;
 
