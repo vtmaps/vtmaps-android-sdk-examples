@@ -45,7 +45,7 @@ public class GeoServiceActivity extends AppCompatActivity implements OnMapReadyC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         MapVT.getInstance(getApplicationContext(), getString(R.string.access_token));
-        MapVT.setDebugMode(true);
+        //MapVT.setDebugMode(true);
         setContentView(R.layout.activity_geo_service);
         mapView = (MapView) findViewById(R.id.mapView);
         mapView.getMapAsync(this);

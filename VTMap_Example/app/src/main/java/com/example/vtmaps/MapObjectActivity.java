@@ -1,6 +1,7 @@
 package com.example.vtmaps;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -22,12 +23,15 @@ import com.mapbox.mapboxsdk.plugins.annotation.OnFillClickListener;
 import com.mapbox.mapboxsdk.plugins.annotation.OnLineClickListener;
 import com.mapbox.turf.TurfTransformation;
 import com.viettel.vtmsdk.MapVT;
+import com.viettel.vtmsdk.annotations.Marker;
+import com.viettel.vtmsdk.annotations.MarkerOptions;
 import com.viettel.vtmsdk.camera.CameraPosition;
 import com.viettel.vtmsdk.geometry.LatLng;
 import com.viettel.vtmsdk.maps.MapView;
 import com.viettel.vtmsdk.maps.OnMapReadyCallback;
 import com.viettel.vtmsdk.maps.Style;
 import com.viettel.vtmsdk.maps.VTMap;
+import com.viettel.vtmsdk.style.layers.Layer;
 import com.viettel.vtmsdk.style.layers.Property;
 
 import java.util.ArrayList;
@@ -132,7 +136,7 @@ public class MapObjectActivity extends AppCompatActivity implements OnMapReadyCa
 
 
     private void drawPolyLine(Style style) {
-        lineManager = new LineManager(mapView, vtMap, style);
+        lineManager = new LineManager(mapView, vtMap, style,"com.mapbox.annotations.points");
         final List<LatLng> listPolygonLaLng = new ArrayList<>();
         listPolygonLaLng.add(new LatLng(21.03352862410621, 105.84525978605035));
         listPolygonLaLng.add(new LatLng(21.028309714074638, 105.84475905989018));
@@ -147,6 +151,20 @@ public class MapObjectActivity extends AppCompatActivity implements OnMapReadyCa
                 Toast.makeText(MapObjectActivity.this, "Line clicked", Toast.LENGTH_LONG).show();
             }
         });
+
+        List<Layer> styles = style.getLayers();
+        String id =   styles.get(styles.size()-1).getId();
+        for(Layer id1: styles){
+            Log.d("LEP",id1.getId());
+        }
+        MarkerOptions option1 = new MarkerOptions();
+        option1.setPosition(new LatLng(16.04791610056455, 108.21643351855755));
+        option1.setTitle("Marker");
+        option1.setSnippet("This is content");
+        Marker simpleMarker = vtMap.addMarker(option1);
+        List<Layer> styles1 = style.getLayers();
+        String id1 =   styles1.get(styles1.size()-1).getId();
+
     }
 
     @Override

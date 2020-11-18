@@ -15,6 +15,7 @@ import com.mapbox.mapboxsdk.plugins.annotation.OnSymbolLongClickListener;
 import com.mapbox.mapboxsdk.plugins.annotation.Symbol;
 import com.mapbox.mapboxsdk.plugins.annotation.SymbolManager;
 import com.mapbox.mapboxsdk.plugins.annotation.SymbolOptions;
+import com.viettel.maps.v3.control.maptype.MapTypeControl;
 import com.viettel.vtmsdk.MapVT;
 import com.viettel.vtmsdk.camera.CameraPosition;
 import com.viettel.vtmsdk.geometry.LatLng;
@@ -52,7 +53,17 @@ public class AddDragMarkerActivity extends AppCompatActivity implements OnMapRea
                         BitmapUtils.getBitmapFromDrawable(getResources().getDrawable(R.drawable.map_marker)),
                         false);
 
-                addDragMarker(style);
+
+
+                MapTypeControl mapTypeControl =new MapTypeControl(mapView,vtMap);
+                mapTypeControl.addToMap(AddDragMarkerActivity.this);
+                mapTypeControl.setOnMapTypeChangedListener(new MapTypeControl.OnMapTypeChangedListener() {
+                    @Override
+                    public void onMapTypeChanged(Style style) {
+                        addDragMarker(style);
+                    }
+                });
+
             }
         });
     }

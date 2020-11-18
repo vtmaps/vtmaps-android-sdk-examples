@@ -13,6 +13,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mapbox.android.core.permissions.PermissionsListener;
 import com.mapbox.android.core.permissions.PermissionsManager;
 import com.mapbox.api.geocoding.v5.models.CarmenFeature;
+import com.viettel.vtmsdk.MapVT;
 import com.viettel.vtmsdk.geometry.LatLng;
 import com.viettel.vtmsdk.location.LocationComponent;
 import com.viettel.vtmsdk.location.LocationComponentActivationOptions;
@@ -58,7 +59,6 @@ public class PlacePickerActivity extends AppCompatActivity implements OnMapReady
 
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(this);
-
     }
 
 

@@ -135,7 +135,6 @@ public class AddMakerActivity extends AppCompatActivity implements OnMapReadyCal
         option.setTitle("Marker");
         option.setSnippet("This is content");
         Marker simpleMarker = vtMap.addMarker(option);
-
     }
 
     private void addCustomMarker() {

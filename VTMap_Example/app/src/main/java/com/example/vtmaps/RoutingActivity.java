@@ -46,10 +46,10 @@ import retrofit2.Response;
 public class RoutingActivity extends AppCompatActivity implements OnMapReadyCallback {
     private MapView mapView;
     private VTMap vtMap;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //Mapbox.getInstance(getApplicationContext(), "pk.eyJ1IjoibGVwcHJvOTAiLCJhIjoiY2s4cG94N2hpMDU4MTNlcGdvY2gyamQwayJ9.LrwJ0gNZ6ncU7yLeaHKxAQ");
         MapVT.getInstance(getApplicationContext(), getString(R.string.access_token));
         setContentView(R.layout.activity_main);
         mapView = (MapView) findViewById(R.id.mapView);
@@ -68,8 +68,8 @@ public class RoutingActivity extends AppCompatActivity implements OnMapReadyCall
     }
 
     @Override
-    public void onMapReady(@NonNull VTMap VTMap) {
-        this.vtMap=VTMap;
+    public void onMapReady(@NonNull final VTMap VTMap) {
+        this.vtMap = VTMap;
         vtMap.setStyle(Style.VTMAP_TRAFFIC_DAY, new Style.OnStyleLoaded() {
 
             public void onStyleLoaded(@NonNull Style style) {
@@ -84,7 +84,6 @@ public class RoutingActivity extends AppCompatActivity implements OnMapReadyCall
                         .accessToken(MapVT.getAccessToken() != null ? MapVT.getAccessToken() : "")
                         .profile(DirectionsCriteria.PROFILE_DRIVING)//driving: cho oto va cycling: cho xe may
                         .alternatives(false)//cho phep hien thi tuyen duong goi y hay khong(trong truong hop tim thay 2 tuyen duong tro len)
-                        .baseUrl("https://api.viettelmaps.com.vn:8080/gateway/routing/v1/")//set url server test
                         .packageId(MapVT.getPackageName());
 
 
@@ -127,11 +126,15 @@ public class RoutingActivity extends AppCompatActivity implements OnMapReadyCall
                     // left, top, right, bottom
                     int topPadding = 100;//directionFrame.getHeight() * 2;
 
-                    CameraPosition position = map.retrieveMap().getCameraForLatLngBounds(bounds, new int[]{50, topPadding, 50, 100});
+                    CameraPosition position = vtMap.getCameraForLatLngBounds(bounds, new int[]{50, topPadding, 50, 100});
                     CameraUpdate cameraUpdate = CameraUpdateFactory.newCameraPosition(position);
+                    vtMap.moveCamera(cameraUpdate);
+
                     NavigationCameraUpdate navigationCameraUpdate = new NavigationCameraUpdate(cameraUpdate);
                     navigationCameraUpdate.setMode(CameraUpdateMode.OVERRIDE);
                     map.retrieveCamera().update(navigationCameraUpdate, 1000);
+
+                    vtMap.moveCamera(cameraUpdate);
 
                 } catch (Exception exception) {
 

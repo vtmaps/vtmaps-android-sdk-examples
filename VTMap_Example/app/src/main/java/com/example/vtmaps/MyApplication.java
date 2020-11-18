@@ -12,6 +12,5 @@ public class MyApplication extends Application {
 
         // VTMap Access token
         MapVT.getInstance(getApplicationContext(), getString(R.string.access_token));
-        MapVT.setDebugMode(true);
     }
 }
