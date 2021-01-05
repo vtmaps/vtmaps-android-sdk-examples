@@ -10,6 +10,9 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.mapbox.mapboxsdk.plugins.annotation.SymbolManager;
+import com.viettel.maps.util.AppInfo;
+import com.viettel.maps.util.MapConfig;
 import com.viettel.vtmsdk.MapVT;
 import com.viettel.vtmsdk.annotations.Icon;
 import com.viettel.vtmsdk.annotations.IconFactory;
@@ -32,10 +35,12 @@ public class AddMakerActivity extends AppCompatActivity implements OnMapReadyCal
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //MapVT.setDebugMode(true);
         MapVT.getInstance(getApplicationContext(), getString(R.string.access_token));
         setContentView(R.layout.activity_add_maker);
         mapView = (MapView) findViewById(R.id.mapView);
         mapView.getMapAsync(this);
+
     }
 
     @Override
@@ -43,6 +48,7 @@ public class AddMakerActivity extends AppCompatActivity implements OnMapReadyCal
         this.vtMap = VTMap;
         VTMap.setStyle(Style.VTMAP_TRAFFIC_DAY, new Style.OnStyleLoaded() {
             public void onStyleLoaded(@NonNull Style style) {
+
                 //set onClick for map
                 vtMap.addOnMapClickListener(new VTMap.OnMapClickListener() {
                     @Override

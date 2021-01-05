@@ -6,9 +6,10 @@
     android:layout_height="match_parent"
     tools:context=".AddMakerActivity">
 
-    <com.viettel.vtmsdk.maps.MapView
-        android:id="@+id/mapView"
+    <com.viettel.maps.MapView
+        xmlns:vtmap="http://schemas.android.com/apk/lib/com.viettel.maps"
+        android:id="@+id/mapViewVT"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        />
+        vtmap:appKey="a682ac669c8884e3697fa1d907e2de8"  />
 </LinearLayout>

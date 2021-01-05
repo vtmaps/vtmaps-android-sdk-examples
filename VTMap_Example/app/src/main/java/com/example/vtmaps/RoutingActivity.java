@@ -14,8 +14,11 @@ import com.mapbox.api.directions.v5.DirectionsCriteria;
 import com.mapbox.api.directions.v5.models.DirectionsResponse;
 import com.mapbox.api.directions.v5.models.DirectionsRoute;
 import com.mapbox.core.constants.Constants;
+import com.mapbox.core.utils.TextUtils;
 import com.mapbox.geojson.LineString;
 import com.mapbox.geojson.Point;
+import com.mapbox.services.android.navigation.ui.v5.NavigationLauncher;
+import com.mapbox.services.android.navigation.ui.v5.NavigationLauncherOptions;
 import com.mapbox.services.android.navigation.ui.v5.camera.CameraUpdateMode;
 import com.mapbox.services.android.navigation.ui.v5.camera.NavigationCameraUpdate;
 import com.mapbox.services.android.navigation.ui.v5.map.NavigationMapboxMap;
@@ -46,6 +49,7 @@ import retrofit2.Response;
 public class RoutingActivity extends AppCompatActivity implements OnMapReadyCallback {
     private MapView mapView;
     private VTMap vtMap;
+    DirectionsRoute route;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +63,29 @@ public class RoutingActivity extends AppCompatActivity implements OnMapReadyCall
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fetchRouteOffline();
+                if (route != null) {
+                    NavigationLauncherOptions.Builder optionsBuilder = NavigationLauncherOptions.builder()
+                            .shouldSimulateRoute(true);
+
+                    CameraPosition initialPosition = new CameraPosition.Builder()
+                            .target(new LatLng(16.04791610056455, 108.21643351855755))
+                            .zoom(10)
+                            .build();
+                    optionsBuilder.initialMapCameraPosition(initialPosition);
+                    optionsBuilder.mapStyle(Style.VTMAP_TRAFFIC_DAY);
+
+                    optionsBuilder.directionsRoute(route);
+
+                    /**
+                     * File downloadDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+                     * String databaseFilePath = downloadDirectory + "/" + "kingfarm.db";
+                     * String offlineStyleUrl = "mapbox://styles/mapbox/navigation-guidance-day-v4";
+                     * optionsBuilder.offlineMapOptions(new MapOfflineOptions(databaseFilePath, offlineStyleUrl));
+                     */
+                    NavigationLauncher.startNavigation(RoutingActivity.this, optionsBuilder.build());
+
+                    //fetchRouteOffline();
+                }
             }
         });
 
@@ -95,6 +121,7 @@ public class RoutingActivity extends AppCompatActivity implements OnMapReadyCall
                     @Override
                     public void onResponse(Call<DirectionsResponse> call, Response<DirectionsResponse> response) {
                         List<DirectionsRoute> routesFetched = response.body().routes();
+                        route = routesFetched.get(0);
                         navigationMapboxMap.drawRoutes(routesFetched);
                         navigationMapboxMap.addDestinationMarker(routesFetched.get(0).legs().get(routesFetched.get(0).legs().size() - 1).steps().get(routesFetched.get(0).legs().get(routesFetched.get(0).legs().size() - 1).steps().size() - 1).maneuver().location());
                         boundCameraToRoute(routesFetched.get(0), navigationMapboxMap);
