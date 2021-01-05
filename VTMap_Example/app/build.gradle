@@ -33,7 +33,9 @@ dependencies {
 
     //vtmaps service
     implementation 'com.vtm.vtmsdk:vtmap-android-sdk:1.0.14'
+
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+
     implementation "com.android.support:cardview-v7:28.0.0"
     implementation "com.android.support:appcompat-v7:28.0.0"
     implementation "com.android.support:design:28.0.0"
