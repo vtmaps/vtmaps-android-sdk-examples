@@ -32,7 +32,13 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
 
     //vtmaps service
-    implementation 'com.vtm.vtmsdk:vtmap-android-sdk:1.0.14'
+    implementation ('com.vtm.vtmsdk:vtmap-android-sdk:1.0.14'){
+        exclude module: 'vtmap-android-navigation-ui'
+
+    }
+    implementation ('com.vtm.vtmsdk:vtmap-android-navigation-ui:0.42.8'){
+        exclude group: 'com.vtm.vtmsdk'
+    }
 
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
 
