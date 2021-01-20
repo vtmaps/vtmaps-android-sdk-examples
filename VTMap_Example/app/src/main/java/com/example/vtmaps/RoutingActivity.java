@@ -14,8 +14,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.mapbox.api.directions.v5.DirectionsCriteria;
 import com.mapbox.api.directions.v5.models.DirectionsResponse;
 import com.mapbox.api.directions.v5.models.DirectionsRoute;
+import com.mapbox.geojson.Feature;
+import com.mapbox.geojson.FeatureCollection;
+import com.mapbox.geojson.Geometry;
 import com.mapbox.geojson.LineString;
 import com.mapbox.geojson.Point;
+import com.mapbox.mapboxsdk.plugins.annotation.SymbolManager;
+import com.mapbox.mapboxsdk.plugins.annotation.SymbolOptions;
 import com.mapbox.services.android.navigation.ui.v5.NavigationLauncher;
 import com.mapbox.services.android.navigation.ui.v5.NavigationLauncherOptions;
 import com.mapbox.services.android.navigation.ui.v5.camera.CameraUpdateMode;
@@ -37,8 +42,11 @@ import com.viettel.vtmsdk.maps.MapView;
 import com.viettel.vtmsdk.maps.OnMapReadyCallback;
 import com.viettel.vtmsdk.maps.Style;
 import com.viettel.vtmsdk.maps.VTMap;
+import com.viettel.vtmsdk.style.expressions.Expression;
 import com.viettel.vtmsdk.style.layers.LineLayer;
 import com.viettel.vtmsdk.style.layers.Property;
+import com.viettel.vtmsdk.style.layers.PropertyFactory;
+import com.viettel.vtmsdk.style.layers.SymbolLayer;
 import com.viettel.vtmsdk.style.sources.GeoJsonOptions;
 import com.viettel.vtmsdk.style.sources.GeoJsonSource;
 
@@ -59,10 +67,23 @@ import static com.viettel.vtmsdk.style.expressions.Expression.product;
 import static com.viettel.vtmsdk.style.expressions.Expression.stop;
 import static com.viettel.vtmsdk.style.expressions.Expression.switchCase;
 import static com.viettel.vtmsdk.style.expressions.Expression.zoom;
+import static com.viettel.vtmsdk.style.layers.Property.NONE;
+import static com.viettel.vtmsdk.style.layers.PropertyFactory.iconAllowOverlap;
+import static com.viettel.vtmsdk.style.layers.PropertyFactory.iconIgnorePlacement;
+import static com.viettel.vtmsdk.style.layers.PropertyFactory.iconImage;
 import static com.viettel.vtmsdk.style.layers.PropertyFactory.lineCap;
 import static com.viettel.vtmsdk.style.layers.PropertyFactory.lineColor;
 import static com.viettel.vtmsdk.style.layers.PropertyFactory.lineJoin;
 import static com.viettel.vtmsdk.style.layers.PropertyFactory.lineWidth;
+import static com.viettel.vtmsdk.style.layers.PropertyFactory.textAllowOverlap;
+import static com.viettel.vtmsdk.style.layers.PropertyFactory.textAnchor;
+import static com.viettel.vtmsdk.style.layers.PropertyFactory.textColor;
+import static com.viettel.vtmsdk.style.layers.PropertyFactory.textField;
+import static com.viettel.vtmsdk.style.layers.PropertyFactory.textFont;
+import static com.viettel.vtmsdk.style.layers.PropertyFactory.textIgnorePlacement;
+import static com.viettel.vtmsdk.style.layers.PropertyFactory.textOffset;
+import static com.viettel.vtmsdk.style.layers.PropertyFactory.textSize;
+import static com.viettel.vtmsdk.style.layers.PropertyFactory.visibility;
 
 public class RoutingActivity extends AppCompatActivity implements OnMapReadyCallback {
     private MapView mapView;
@@ -130,6 +151,7 @@ public class RoutingActivity extends AppCompatActivity implements OnMapReadyCall
                         .target(new LatLng(16.04791610056455, 108.21643351855755))
                         .zoom(12)
                         .build());
+                addMarkerWithLabel(style);
 
                 // Map is set up and the style has loaded. Now you can add data or make other map adjustments
                 final NavigationMapboxMap navigationMapboxMap = new NavigationMapboxMap(mapView, vtMap);
@@ -148,9 +170,9 @@ public class RoutingActivity extends AppCompatActivity implements OnMapReadyCall
                     public void onResponse(Call<DirectionsResponse> call, Response<DirectionsResponse> response) {
                         List<DirectionsRoute> routesFetched = response.body().routes();
                         route = routesFetched.get(0);
-                        navigationMapboxMap.drawRoutes(routesFetched);
+                      navigationMapboxMap.drawRoutes(routesFetched);
                        // navigationMapboxMap.addDestinationMarker(routesFetched.get(0).legs().get(routesFetched.get(0).legs().size() - 1).steps().get(routesFetched.get(0).legs().get(routesFetched.get(0).legs().size() - 1).steps().size() - 1).maneuver().location());
-                        boundCameraToRoute(routesFetched.get(0), navigationMapboxMap);
+                       boundCameraToRoute(routesFetched.get(0), navigationMapboxMap);
                     }
 
                     @Override
@@ -162,6 +184,31 @@ public class RoutingActivity extends AppCompatActivity implements OnMapReadyCall
 
             }
         });
+    }
+
+    private void addMarkerWithLabel(Style style){
+        Point point = Point.fromLngLat(108.21643351855755,16.04791610056455 );
+
+        FeatureCollection featureCollection= FeatureCollection.fromFeature(Feature.fromGeometry(point));
+        GeoJsonSource  source = new GeoJsonSource("SOURCE_ID", featureCollection);
+        style.addSource(source);
+        style.addImage("icon", getResources().getDrawable(R.drawable.map_marker));
+
+        SymbolOptions sampleSymbolOptions = new SymbolOptions()
+                .withLatLng(new LatLng(16.04791610056455,108.21643351855755 ))
+                .withIconImage("icon")
+                .withIconSize(1f)
+                .withTextField("hi you")
+                .withTextSize(16f)
+                .withIconOffset(new Float[] {0f, -20f})
+                .withTextFont(new String[] {"Open Sans Bold", "Arial Unicode MS Bold"});
+        SymbolManager sampleSymbolManager = new SymbolManager(mapView, vtMap, style);
+        sampleSymbolManager.setIconAllowOverlap(true);
+        sampleSymbolManager.setTextAllowOverlap(true);
+        sampleSymbolManager.setTextIgnorePlacement(true);
+        sampleSymbolManager.setIconIgnorePlacement(true);
+       sampleSymbolManager.create(sampleSymbolOptions);
+
     }
 
     private void drawRoute(Style style) {
